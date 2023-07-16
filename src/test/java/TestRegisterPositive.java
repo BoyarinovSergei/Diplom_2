@@ -1,4 +1,5 @@
 /*
+ * Раздел: Создание пользователя:
  * Класс включает в себя проверки:
  * 1. создать уникального пользователя;
  * 2. создать пользователя, который уже зарегистрирован;
@@ -23,7 +24,7 @@ import static requestSamples.SetOfReqSamples.makePostRequest;
 import static urlsAndAPIs.APIs.DELETE_USER;
 import static urlsAndAPIs.APIs.USER_CREATION;
 
-public class TestRegisterAPIPositive extends SetDefaultURL {
+public class TestRegisterPositive extends SetDefaultURL {
     private static String email;
     private static String password;
     private static String name;
