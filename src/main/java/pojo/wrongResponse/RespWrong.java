@@ -1,4 +1,4 @@
-package pojo.registerAPI.wrongResponse;
+package pojo.wrongResponse;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

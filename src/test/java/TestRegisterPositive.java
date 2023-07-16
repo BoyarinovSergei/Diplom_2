@@ -12,7 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 import pojo.registerAPI.correctResponse.RespRegister;
 import pojo.registerAPI.request.ReqRegister;
-import pojo.registerAPI.wrongResponse.RespWrong;
+import pojo.wrongResponse.RespWrong;
 
 import java.util.Locale;
 

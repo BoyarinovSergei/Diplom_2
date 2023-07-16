@@ -9,6 +9,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import pojo.loginAPI.request.ReqLogin;
 import pojo.loginAPI.response.RespLogin;
 import pojo.registerAPI.correctResponse.RespRegister;
 import pojo.registerAPI.request.ReqRegister;
@@ -46,7 +47,7 @@ public class TestLoginPositive extends SetDefaultURL {
     @Description("Авторизация под существующим пользователем")
     public void loginUsingExistingCredentials() {
         RespLogin respLogin =
-                makePostRequest(USER_LOGIN, new ReqRegister(email, password, name))
+                makePostRequest(USER_LOGIN, new ReqLogin(email, password))
                         .then()
                         .statusCode(SC_OK)
                         .extract()
