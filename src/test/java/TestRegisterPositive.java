@@ -10,8 +10,8 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import pojo.registerAPI.request.ReqRegister;
 import pojo.registerAPI.correctResponse.RespRegister;
+import pojo.registerAPI.request.ReqRegister;
 import pojo.registerAPI.wrongResponse.RespWrong;
 
 import java.util.Locale;
@@ -29,7 +29,6 @@ public class TestRegisterPositive extends SetDefaultURL {
     private static String password;
     private static String name;
     private String bearerToken;
-    private static final boolean EXPECTED_SUCCESS = false;
     private static final String EXPECTED_MESSAGE = "User already exists";
 
     @Before
@@ -79,7 +78,7 @@ public class TestRegisterPositive extends SetDefaultURL {
                         .extract()
                         .as(RespWrong.class);
 
-        Assert.assertEquals(EXPECTED_SUCCESS, respWrong.success);
+        Assert.assertFalse(respWrong.success);
         Assert.assertEquals(EXPECTED_MESSAGE, respWrong.getMessage());
     }
 

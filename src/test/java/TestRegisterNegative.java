@@ -20,7 +20,6 @@ import static urlsAndAPIs.APIs.USER_CREATION;
 @RunWith(Parameterized.class)
 public class TestRegisterNegative extends SetDefaultURL {
     private final ReqRegister reqRegister;
-    private static final boolean EXPECTED_SUCCESS = false;
     private static final String EXPECTED_MESSAGE = "Email, password and name are required fields";
 
     public TestRegisterNegative(ReqRegister reqRegister) {
@@ -46,7 +45,7 @@ public class TestRegisterNegative extends SetDefaultURL {
                         .extract()
                         .as(RespWrong.class);
 
-        Assert.assertEquals(EXPECTED_SUCCESS, respWrong.success);
+        Assert.assertFalse(respWrong.success);
         Assert.assertEquals(EXPECTED_MESSAGE, respWrong.getMessage());
     }
 }
