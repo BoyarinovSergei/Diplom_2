@@ -1,11 +1,11 @@
-package pojo.registerAPI.response;
+package pojo.registerAPI.correctResponse;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
-public class RespRegisterApi {
+public class RespRegister {
     public boolean success;
     public User user;
     public String accessToken;

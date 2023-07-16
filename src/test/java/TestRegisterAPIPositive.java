@@ -9,12 +9,14 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import pojo.registerAPI.request.ReqRegisterApi;
-import pojo.registerAPI.response.RespRegisterApi;
+import pojo.registerAPI.request.ReqRegister;
+import pojo.registerAPI.correctResponse.RespRegister;
+import pojo.registerAPI.wrongResponse.RespWrong;
 
 import java.util.Locale;
 
 import static helper.StringGenerator.generateString;
+import static org.apache.http.HttpStatus.SC_FORBIDDEN;
 import static org.apache.http.HttpStatus.SC_OK;
 import static requestSamples.SetOfReqSamples.makeDeleteRequest;
 import static requestSamples.SetOfReqSamples.makePostRequest;
@@ -25,8 +27,9 @@ public class TestRegisterAPIPositive extends SetDefaultURL {
     private static String email;
     private static String password;
     private static String name;
-
     private String bearerToken;
+    private static final boolean EXPECTED_SUCCESS = false;
+    private static final String EXPECTED_MESSAGE = "User already exists";
 
     @Before
     @Description("Генерация тестовых данных")
@@ -40,12 +43,12 @@ public class TestRegisterAPIPositive extends SetDefaultURL {
     @Test
     @Description("Создание уникального пользователя, проверка статуса ответа и ключевых полей")
     public void signUpNewUser() {
-        RespRegisterApi reqRegisterApi =
-                makePostRequest(USER_CREATION, new ReqRegisterApi(email, password, name))
+        RespRegister reqRegisterApi =
+                makePostRequest(USER_CREATION, new ReqRegister(email, password, name))
                         .then()
                         .statusCode(SC_OK)
                         .extract()
-                        .as(RespRegisterApi.class);
+                        .as(RespRegister.class);
 
         bearerToken = reqRegisterApi.accessToken;
 
@@ -54,6 +57,29 @@ public class TestRegisterAPIPositive extends SetDefaultURL {
         Assert.assertEquals(name, reqRegisterApi.user.name);
         Assert.assertNotNull(reqRegisterApi.accessToken);
         Assert.assertNotNull(reqRegisterApi.refreshToken);
+    }
+
+    @Test
+    @Description("Создание нового пользователя и затем создание пользователя с такими же данными с проверкой всех полей в ответе")
+    public void signUpNewUserTwoTimes() {
+        RespRegister reqRegisterApi =
+                makePostRequest(USER_CREATION, new ReqRegister(email, password, name))
+                        .then()
+                        .statusCode(SC_OK)
+                        .extract()
+                        .as(RespRegister.class);
+
+        bearerToken = reqRegisterApi.accessToken;
+
+        RespWrong respWrong =
+                makePostRequest(USER_CREATION, new ReqRegister(email, password, name))
+                        .then()
+                        .statusCode(SC_FORBIDDEN)
+                        .extract()
+                        .as(RespWrong.class);
+
+        Assert.assertEquals(EXPECTED_SUCCESS, respWrong.success);
+        Assert.assertEquals(EXPECTED_MESSAGE, respWrong.getMessage());
     }
 
     @After

@@ -3,7 +3,7 @@ package pojo.loginAPI.response;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pojo.registerAPI.response.User;
+import pojo.registerAPI.correctResponse.User;
 
 @Data
 @AllArgsConstructor

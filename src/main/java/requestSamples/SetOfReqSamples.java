@@ -5,18 +5,18 @@
 package requestSamples;
 
 import io.qameta.allure.Step;
-import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import static org.hamcrest.CoreMatchers.equalTo;
 
 import static headers.SetOfHeaders.DEFAULT_HEADERS;
+import static io.restassured.RestAssured.given;
 import static org.apache.http.HttpStatus.SC_ACCEPTED;
+import static org.hamcrest.CoreMatchers.equalTo;
 
 public class SetOfReqSamples {
 
     @Step("Выполнение post запроса")
     public static Response makePostRequest(String path, Object json) {
-        return RestAssured.given()
+        return given()
                 .headers(DEFAULT_HEADERS)
                 .body(json)
                 .post(path)
@@ -24,8 +24,8 @@ public class SetOfReqSamples {
     }
 
     @Step("Выполнение delete запроса")
-    public static Response makeDeleteRequest(String path, String token) {
-        return RestAssured.given()
+    public static void makeDeleteRequest(String path, String token) {
+        given()
                 .headers(DEFAULT_HEADERS)
                 .header("Authorization", token)
                 .delete(path)
@@ -33,9 +33,6 @@ public class SetOfReqSamples {
                 .statusCode(SC_ACCEPTED)
                 .and()
                 .body("success", equalTo(true))
-                .body("message", equalTo("User successfully removed"))
-                .and()
-                .extract()
-                .response();
+                .body("message", equalTo("User successfully removed"));
     }
 }
