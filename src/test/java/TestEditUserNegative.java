@@ -15,7 +15,7 @@ import pojo.commonErrorResponse.RespWrong;
 import pojo.register.correctResponse.RespRegister;
 import pojo.register.correctResponse.User;
 import pojo.register.request.ReqRegister;
-import pojo.userEdit.correctReqAndResp.EditUser;
+import pojo.userEdit.EditUser;
 
 import static helper.StringGenerator.generateString;
 import static org.apache.http.HttpStatus.SC_OK;

@@ -1,14 +1,14 @@
-package pojo.userEdit.correctReqAndResp;
+package pojo.orderCreation.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pojo.register.correctResponse.User;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class EditUser {
+public class RespOrderCreationWithNoAuth {
     public boolean success;
-    public User user;
+    public String name;
+    public Order order;
 }

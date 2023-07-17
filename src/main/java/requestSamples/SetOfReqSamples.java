@@ -42,6 +42,14 @@ public class SetOfReqSamples {
                 .andReturn();
     }
 
+    @Step("Выполнение get запроса")
+    public static Response makeGetRequest(String path) {
+        return given()
+                .headers(DEFAULT_HEADERS)
+                .get(path)
+                .andReturn();
+    }
+
     @Step("Выполнение delete запроса")
     public static void makeDeleteRequest(String path, String token) {
         given()

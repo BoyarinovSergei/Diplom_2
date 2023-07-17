@@ -14,7 +14,7 @@ import org.junit.runners.Parameterized;
 import pojo.register.correctResponse.RespRegister;
 import pojo.register.correctResponse.User;
 import pojo.register.request.ReqRegister;
-import pojo.userEdit.correctReqAndResp.EditUser;
+import pojo.userEdit.EditUser;
 
 import java.util.Locale;
 
