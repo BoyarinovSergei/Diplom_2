@@ -9,17 +9,17 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import pojo.loginAPI.request.ReqLogin;
-import pojo.loginAPI.response.RespLogin;
-import pojo.registerAPI.correctResponse.RespRegister;
-import pojo.registerAPI.request.ReqRegister;
+import pojo.login.request.ReqLogin;
+import pojo.login.response.RespLogin;
+import pojo.register.correctResponse.RespRegister;
+import pojo.register.request.ReqRegister;
 
 import java.util.Locale;
 
 import static helper.StringGenerator.generateString;
 import static org.apache.http.HttpStatus.SC_OK;
 import static requestSamples.SetOfReqSamples.makeDeleteRequest;
-import static requestSamples.SetOfReqSamples.makePostRequest;
+import static requestSamples.SetOfReqSamples.makePostRequestWithNoAuthorization;
 import static urlsAndAPIs.APIs.*;
 
 public class TestLoginPositive extends SetDefaultURL {
@@ -36,7 +36,7 @@ public class TestLoginPositive extends SetDefaultURL {
         name = generateString(5);
 
         bearerToken =
-                makePostRequest(USER_CREATION, new ReqRegister(email, password, name))
+                makePostRequestWithNoAuthorization(USER_CREATION, new ReqRegister(email, password, name))
                         .then()
                         .statusCode(SC_OK)
                         .extract()
@@ -47,7 +47,7 @@ public class TestLoginPositive extends SetDefaultURL {
     @Description("Авторизация под существующим пользователем")
     public void loginUsingExistingCredentials() {
         RespLogin respLogin =
-                makePostRequest(USER_LOGIN, new ReqLogin(email, password))
+                makePostRequestWithNoAuthorization(USER_LOGIN, new ReqLogin(email, password))
                         .then()
                         .statusCode(SC_OK)
                         .extract()
@@ -63,6 +63,6 @@ public class TestLoginPositive extends SetDefaultURL {
     @After
     @Description("Удаление созданных пользоватлеей")
     public void shutDown() {
-        makeDeleteRequest(DELETE_USER, bearerToken);
+        makeDeleteRequest(USER, bearerToken);
     }
 }

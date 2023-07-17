@@ -1,13 +1,14 @@
-package pojo.registerAPI.correctResponse;
+package pojo.userEdit.correctReqAndResp;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
+import pojo.register.correctResponse.User;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RespRegister {
+public class EditUser {
     public boolean success;
     public User user;
-    public String accessToken;
-    public String refreshToken;
 }

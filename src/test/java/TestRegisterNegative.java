@@ -9,12 +9,12 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import pojo.registerAPI.request.ReqRegister;
-import pojo.wrongResponse.RespWrong;
+import pojo.register.request.ReqRegister;
+import pojo.commonErrorResponse.RespWrong;
 
 import static helper.StringGenerator.generateString;
 import static org.apache.http.HttpStatus.SC_FORBIDDEN;
-import static requestSamples.SetOfReqSamples.makePostRequest;
+import static requestSamples.SetOfReqSamples.makePostRequestWithNoAuthorization;
 import static urlsAndAPIs.APIs.USER_CREATION;
 
 @RunWith(Parameterized.class)
@@ -39,7 +39,7 @@ public class TestRegisterNegative extends SetDefaultURL {
     @Description("Проверка на обязательность заполнения всех полей")
     public void checkAllRequiredFields() {
         RespWrong respWrong =
-                makePostRequest(USER_CREATION, reqRegister)
+                makePostRequestWithNoAuthorization(USER_CREATION, reqRegister)
                         .then()
                         .statusCode(SC_FORBIDDEN)
                         .extract()

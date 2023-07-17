@@ -10,9 +10,9 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import pojo.registerAPI.correctResponse.RespRegister;
-import pojo.registerAPI.request.ReqRegister;
-import pojo.wrongResponse.RespWrong;
+import pojo.register.correctResponse.RespRegister;
+import pojo.register.request.ReqRegister;
+import pojo.commonErrorResponse.RespWrong;
 
 import java.util.Locale;
 
@@ -20,8 +20,8 @@ import static helper.StringGenerator.generateString;
 import static org.apache.http.HttpStatus.SC_FORBIDDEN;
 import static org.apache.http.HttpStatus.SC_OK;
 import static requestSamples.SetOfReqSamples.makeDeleteRequest;
-import static requestSamples.SetOfReqSamples.makePostRequest;
-import static urlsAndAPIs.APIs.DELETE_USER;
+import static requestSamples.SetOfReqSamples.makePostRequestWithNoAuthorization;
+import static urlsAndAPIs.APIs.USER;
 import static urlsAndAPIs.APIs.USER_CREATION;
 
 public class TestRegisterPositive extends SetDefaultURL {
@@ -39,12 +39,11 @@ public class TestRegisterPositive extends SetDefaultURL {
         name = generateString(5);
     }
 
-
     @Test
     @Description("Создание уникального пользователя, проверка статуса ответа и ключевых полей")
     public void signUpNewUser() {
         RespRegister reqRegisterApi =
-                makePostRequest(USER_CREATION, new ReqRegister(email, password, name))
+                makePostRequestWithNoAuthorization(USER_CREATION, new ReqRegister(email, password, name))
                         .then()
                         .statusCode(SC_OK)
                         .extract()
@@ -63,7 +62,7 @@ public class TestRegisterPositive extends SetDefaultURL {
     @Description("Создание нового пользователя и затем создание пользователя с такими же данными с проверкой всех полей в ответе")
     public void signUpNewUserTwoTimes() {
         RespRegister reqRegisterApi =
-                makePostRequest(USER_CREATION, new ReqRegister(email, password, name))
+                makePostRequestWithNoAuthorization(USER_CREATION, new ReqRegister(email, password, name))
                         .then()
                         .statusCode(SC_OK)
                         .extract()
@@ -72,7 +71,7 @@ public class TestRegisterPositive extends SetDefaultURL {
         bearerToken = reqRegisterApi.accessToken;
 
         RespWrong respWrong =
-                makePostRequest(USER_CREATION, new ReqRegister(email, password, name))
+                makePostRequestWithNoAuthorization(USER_CREATION, new ReqRegister(email, password, name))
                         .then()
                         .statusCode(SC_FORBIDDEN)
                         .extract()
@@ -85,6 +84,6 @@ public class TestRegisterPositive extends SetDefaultURL {
     @After
     @Description("Удаление созданных пользоватлеей")
     public void shutDown() {
-        makeDeleteRequest(DELETE_USER, bearerToken);
+        makeDeleteRequest(USER, bearerToken);
     }
 }

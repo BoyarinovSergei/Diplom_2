@@ -1,9 +1,9 @@
-package pojo.loginAPI.response;
+package pojo.login.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pojo.registerAPI.correctResponse.User;
+import pojo.register.correctResponse.User;
 
 @Data
 @AllArgsConstructor

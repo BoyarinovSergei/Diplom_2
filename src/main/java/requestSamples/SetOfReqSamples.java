@@ -14,12 +14,22 @@ import static org.hamcrest.CoreMatchers.equalTo;
 
 public class SetOfReqSamples {
 
-    @Step("Выполнение post запроса")
-    public static Response makePostRequest(String path, Object json) {
+    @Step("Выполнение post запроса без авторизации")
+    public static Response makePostRequestWithNoAuthorization(String path, Object json) {
         return given()
                 .headers(DEFAULT_HEADERS)
                 .body(json)
                 .post(path)
+                .andReturn();
+    }
+
+    @Step("Выполнение patch запроса с авторизацией")
+    public static Response makePatchRequestWithAuthorization(String path, Object json, String token) {
+        return given()
+                .headers(DEFAULT_HEADERS)
+                .header("Authorization", token)
+                .body(json)
+                .patch(path)
                 .andReturn();
     }
 

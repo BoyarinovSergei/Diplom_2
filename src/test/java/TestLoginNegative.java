@@ -8,12 +8,12 @@ import io.qameta.allure.Description;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import pojo.loginAPI.request.ReqLogin;
-import pojo.wrongResponse.RespWrong;
+import pojo.login.request.ReqLogin;
+import pojo.commonErrorResponse.RespWrong;
 
 import static helper.StringGenerator.generateString;
 import static org.apache.http.HttpStatus.SC_UNAUTHORIZED;
-import static requestSamples.SetOfReqSamples.makePostRequest;
+import static requestSamples.SetOfReqSamples.makePostRequestWithNoAuthorization;
 import static urlsAndAPIs.APIs.USER_LOGIN;
 
 public class TestLoginNegative extends SetDefaultURL {
@@ -32,7 +32,7 @@ public class TestLoginNegative extends SetDefaultURL {
     @Description("Авторизация под существующим пользователем")
     public void loginUsingExistingCredentials() {
         RespWrong respWrong =
-                makePostRequest(USER_LOGIN, new ReqLogin(email, password))
+                makePostRequestWithNoAuthorization(USER_LOGIN, new ReqLogin(email, password))
                         .then()
                         .statusCode(SC_UNAUTHORIZED)
                         .extract()
