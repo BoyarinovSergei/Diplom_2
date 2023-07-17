@@ -1,7 +1,7 @@
 /*
  * Раздел: Изменение данных пользователя:
  * Класс включает в себя проверки:
- * 1. с авторизацией,
+ * 2. без авторизации,
  * */
 
 import io.qameta.allure.Description;
@@ -11,27 +11,28 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import pojo.commonErrorResponse.RespWrong;
 import pojo.register.correctResponse.RespRegister;
 import pojo.register.correctResponse.User;
 import pojo.register.request.ReqRegister;
 import pojo.userEdit.correctReqAndResp.EditUser;
 
-import java.util.Locale;
-
 import static helper.StringGenerator.generateString;
 import static org.apache.http.HttpStatus.SC_OK;
+import static org.apache.http.HttpStatus.SC_UNAUTHORIZED;
 import static requestSamples.SetOfReqSamples.*;
 import static urlsAndAPIs.APIs.USER;
 import static urlsAndAPIs.APIs.USER_CREATION;
 
 @RunWith(Parameterized.class)
-public class TestEditUserPositive extends SetDefaultURL {
+public class TestEditUserNegative extends SetDefaultURL {
+    private static final String EXPECTED_MESSAGE = "You should be authorised";
     private static String email;
     private static String name;
     private String bearerToken;
     private final EditUser editUser;
 
-    public TestEditUserPositive(EditUser editUser) {
+    public TestEditUserNegative(EditUser editUser) {
         this.editUser = editUser;
     }
 
@@ -61,19 +62,18 @@ public class TestEditUserPositive extends SetDefaultURL {
     }
 
     @Test
-    @Description("Проверка на возможность изменения полей success, email, name и проверка всех полей в ответе со статусом с токеном")
-    public void checkAllOptionalFieldsWithToken() {
-        EditUser editUser1 =
-                makePatchRequestWithAuthorization(USER, editUser, bearerToken)
+    @Description("Проверка на возможность изменения полей success, email, name и проверка всех полей в ответе со статусом без токена")
+    public void checkAllOptionalFieldsWithNoToken() {
+        RespWrong respWrong =
+                makePatchRequestWithNoAuthorization(USER, editUser)
                         .then()
-                        .statusCode(SC_OK)
+                        .statusCode(SC_UNAUTHORIZED)
                         .and()
                         .extract()
-                        .as(EditUser.class);
+                        .as(RespWrong.class);
 
-        Assert.assertTrue(editUser1.success);
-        Assert.assertEquals(editUser1.user.getEmail(), email.toLowerCase(Locale.ROOT));
-        Assert.assertEquals(editUser1.user.getName(), name);
+        Assert.assertFalse(respWrong.success);
+        Assert.assertEquals(EXPECTED_MESSAGE, respWrong.message);
     }
 
     @After

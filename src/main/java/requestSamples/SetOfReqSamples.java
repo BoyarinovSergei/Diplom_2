@@ -33,6 +33,15 @@ public class SetOfReqSamples {
                 .andReturn();
     }
 
+    @Step("Выполнение patch запроса без авторизации")
+    public static Response makePatchRequestWithNoAuthorization(String path, Object json) {
+        return given()
+                .headers(DEFAULT_HEADERS)
+                .body(json)
+                .patch(path)
+                .andReturn();
+    }
+
     @Step("Выполнение delete запроса")
     public static void makeDeleteRequest(String path, String token) {
         given()
