@@ -72,7 +72,7 @@ public class TestEditUserPositive extends SetDefaultURL {
                         .as(EditUser.class);
 
         Assert.assertTrue(editUser1.success);
-        Assert.assertEquals(editUser1.user.getEmail(), email.toLowerCase(Locale.ROOT));
+        Assert.assertEquals(editUser1.user.getEmail(), email);
         Assert.assertEquals(editUser1.user.getName(), name);
     }
 

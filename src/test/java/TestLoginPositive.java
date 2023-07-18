@@ -54,7 +54,7 @@ public class TestLoginPositive extends SetDefaultURL {
                         .as(RespLogin.class);
 
         Assert.assertTrue(respLogin.success);
-        Assert.assertEquals(email.toLowerCase(Locale.ROOT), respLogin.user.email);
+        Assert.assertEquals(email, respLogin.user.email);
         Assert.assertEquals(name, respLogin.user.name);
         Assert.assertNotNull(respLogin.accessToken);
         Assert.assertNotNull(respLogin.refreshToken);

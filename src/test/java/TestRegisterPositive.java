@@ -52,7 +52,7 @@ public class TestRegisterPositive extends SetDefaultURL {
         bearerToken = reqRegisterApi.accessToken;
 
         Assert.assertTrue(reqRegisterApi.success);
-        Assert.assertEquals(email.toLowerCase(Locale.ROOT), reqRegisterApi.user.email);
+        Assert.assertEquals(email, reqRegisterApi.user.email);
         Assert.assertEquals(name, reqRegisterApi.user.name);
         Assert.assertNotNull(reqRegisterApi.accessToken);
         Assert.assertNotNull(reqRegisterApi.refreshToken);
