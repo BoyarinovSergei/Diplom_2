@@ -53,10 +53,19 @@ public class SetOfReqSamples {
                 .andReturn();
     }
 
-    @Step("Выполнение get запроса")
+    @Step("Выполнение get запроса без токена")
     public static Response makeGetRequest(String path) {
         return given()
                 .headers(DEFAULT_HEADERS)
+                .get(path)
+                .andReturn();
+    }
+
+    @Step("Выполнение get запроса с токеном")
+    public static Response makeGetRequestWithToken(String path, String token) {
+        return given()
+                .headers(DEFAULT_HEADERS)
+                .header("Authorization", token)
                 .get(path)
                 .andReturn();
     }
