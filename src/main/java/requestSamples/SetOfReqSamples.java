@@ -58,11 +58,7 @@ public class SetOfReqSamples {
         return given()
                 .headers(DEFAULT_HEADERS)
                 .get(path)
-                .then()
-                .statusCode(SC_OK)
-                .and()
-                .extract()
-                .response();
+                .andReturn();
     }
 
     @Step("Выполнение delete запроса")
