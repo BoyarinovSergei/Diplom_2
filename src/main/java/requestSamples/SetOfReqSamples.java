@@ -10,6 +10,7 @@ import io.restassured.response.Response;
 import static headers.SetOfHeaders.DEFAULT_HEADERS;
 import static io.restassured.RestAssured.given;
 import static org.apache.http.HttpStatus.SC_ACCEPTED;
+import static org.apache.http.HttpStatus.SC_OK;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 public class SetOfReqSamples {
@@ -18,6 +19,16 @@ public class SetOfReqSamples {
     public static Response makePostRequestWithNoAuthorization(String path, Object json) {
         return given()
                 .headers(DEFAULT_HEADERS)
+                .body(json)
+                .post(path)
+                .andReturn();
+    }
+
+    @Step("Выполнение post запроса с авторизацией")
+    public static Response makePostRequestWithAuthorization(String path, Object json, String token) {
+        return given()
+                .headers(DEFAULT_HEADERS)
+                .header("Authorization", token)
                 .body(json)
                 .post(path)
                 .andReturn();
@@ -47,7 +58,11 @@ public class SetOfReqSamples {
         return given()
                 .headers(DEFAULT_HEADERS)
                 .get(path)
-                .andReturn();
+                .then()
+                .statusCode(SC_OK)
+                .and()
+                .extract()
+                .response();
     }
 
     @Step("Выполнение delete запроса")

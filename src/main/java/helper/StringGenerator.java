@@ -2,6 +2,7 @@ package helper;
 
 import io.qameta.allure.Step;
 
+import java.util.Locale;
 import java.util.Random;
 
 public class StringGenerator {
@@ -16,6 +17,6 @@ public class StringGenerator {
         {
             text[i] = characters.charAt(rng.nextInt(characters.length()));
         }
-        return new String(text);
+        return new String(text).toLowerCase(Locale.ROOT);
     }
 }
