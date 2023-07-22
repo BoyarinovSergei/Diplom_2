@@ -1,0 +1,67 @@
+/*
+ * Раздел: Логин пользователя:
+ * Класс включает в себя проверки:
+ * 1. логин под существующим пользователем,
+ * */
+
+import commonClasses.SetDefaultURL;
+import io.qameta.allure.Description;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import pojo.login.request.ReqLogin;
+import pojo.login.response.RespLogin;
+import pojo.register.correctResponse.RespRegister;
+import pojo.register.request.ReqRegister;
+
+import static helper.StringGenerator.generateString;
+import static org.apache.http.HttpStatus.SC_OK;
+import static requestSamples.SetOfReqSamples.makeDeleteRequest;
+import static requestSamples.SetOfReqSamples.makePostRequestWithNoAuthorization;
+import static urlsAndAPIs.APIs.*;
+
+public class TestLoginPositive extends SetDefaultURL {
+    private static String email;
+    private static String password;
+    private static String name;
+    private String bearerToken;
+
+    @Before
+    @Description("Генерация тестовых данных и создание нового пользователя")
+    public void generateData() {
+        email = generateString(5) + "@yandex.ru";
+        password = generateString(5);
+        name = generateString(5);
+
+        bearerToken =
+                makePostRequestWithNoAuthorization(USER_CREATION, new ReqRegister(email, password, name))
+                        .then()
+                        .statusCode(SC_OK)
+                        .extract()
+                        .as(RespRegister.class).getAccessToken();
+    }
+
+    @Test
+    @Description("Авторизация под существующим пользователем")
+    public void loginUsingExistingCredentials() {
+        RespLogin respLogin =
+                makePostRequestWithNoAuthorization(USER_LOGIN, new ReqLogin(email, password))
+                        .then()
+                        .statusCode(SC_OK)
+                        .extract()
+                        .as(RespLogin.class);
+
+        Assert.assertTrue(respLogin.getSuccess());
+        Assert.assertEquals(email, respLogin.getUser().getEmail());
+        Assert.assertEquals(name, respLogin.getUser().getName());
+        Assert.assertNotNull(respLogin.getAccessToken());
+        Assert.assertNotNull(respLogin.getRefreshToken());
+    }
+
+    @After
+    @Description("Удаление созданных пользоватлеей")
+    public void shutDown() {
+        makeDeleteRequest(USER, bearerToken);
+    }
+}
