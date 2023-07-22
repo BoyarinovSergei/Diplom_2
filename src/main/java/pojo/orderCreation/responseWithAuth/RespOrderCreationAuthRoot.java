@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RespOrderCreationAuthRoot {
-    public boolean success;
-    public String name;
-    public Order order;
+    private Boolean success;
+    private String name;
+    private Order order;
 }
 

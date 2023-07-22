@@ -10,12 +10,12 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Order {
-    public String _id;
-    public List<String> ingredients;
-    public String status;
-    public String name;
-    public String createdAt;
-    public String updatedAt;
-    public int number;
+    private String _id;
+    private List<String> ingredients;
+    private String status;
+    private String name;
+    private String createdAt;
+    private String updatedAt;
+    private int number;
 }
 

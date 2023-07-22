@@ -9,8 +9,8 @@ import io.qameta.allure.Description;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import pojo.commonerrorresponse.RespWrong;
 import pojo.login.request.ReqLogin;
-import pojo.commonErrorResponse.RespWrong;
 
 import static helper.StringGenerator.generateString;
 import static org.apache.http.HttpStatus.SC_UNAUTHORIZED;
@@ -30,8 +30,8 @@ public class TestLoginNegative extends SetDefaultURL {
     }
 
     @Test
-    @Description("Авторизация под существующим пользователем")
-    public void loginUsingExistingCredentials() {
+    @Description("Авторизация под несуществующим пользователем")
+    public void loginUsingNonexistentCredentials() {
         RespWrong respWrong =
                 makePostRequestWithNoAuthorization(USER_LOGIN, new ReqLogin(email, password))
                         .then()
@@ -39,7 +39,7 @@ public class TestLoginNegative extends SetDefaultURL {
                         .extract()
                         .as(RespWrong.class);
 
-        Assert.assertFalse(respWrong.success);
+        Assert.assertFalse(respWrong.getSuccess());
         Assert.assertEquals(EXPECTED_MESSAGE, respWrong.getMessage());
     }
 }

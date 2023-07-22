@@ -8,7 +8,7 @@ import commonClasses.SetDefaultURL;
 import io.qameta.allure.Description;
 import org.junit.Assert;
 import org.junit.Test;
-import pojo.commonErrorResponse.RespWrong;
+import pojo.commonerrorresponse.RespWrong;
 
 import static org.apache.http.HttpStatus.SC_UNAUTHORIZED;
 import static requestSamples.SetOfReqSamples.makeGetRequest;
@@ -27,7 +27,7 @@ public class TestGetOrdersNegative extends SetDefaultURL {
                 .extract()
                 .as(RespWrong.class);
 
-        Assert.assertFalse(respWrong.success);
+        Assert.assertFalse(respWrong.getSuccess());
         Assert.assertEquals(EXPECTED_MESSAGE, respWrong.getMessage());
     }
 }

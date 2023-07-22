@@ -12,7 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import pojo.commonErrorResponse.RespWrong;
+import pojo.commonerrorresponse.RespWrong;
 import pojo.register.correctResponse.RespRegister;
 import pojo.register.correctResponse.User;
 import pojo.register.request.ReqRegister;
@@ -59,7 +59,7 @@ public class TestEditUserNegative extends SetDefaultURL {
                         .then()
                         .statusCode(SC_OK)
                         .extract()
-                        .as(RespRegister.class).accessToken;
+                        .as(RespRegister.class).getAccessToken();
     }
 
     @Test
@@ -73,8 +73,8 @@ public class TestEditUserNegative extends SetDefaultURL {
                         .extract()
                         .as(RespWrong.class);
 
-        Assert.assertFalse(respWrong.success);
-        Assert.assertEquals(EXPECTED_MESSAGE, respWrong.message);
+        Assert.assertFalse(respWrong.getSuccess());
+        Assert.assertEquals(EXPECTED_MESSAGE, respWrong.getMessage());
     }
 
     @After

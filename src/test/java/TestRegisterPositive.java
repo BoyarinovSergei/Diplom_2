@@ -13,7 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 import pojo.register.correctResponse.RespRegister;
 import pojo.register.request.ReqRegister;
-import pojo.commonErrorResponse.RespWrong;
+import pojo.commonerrorresponse.RespWrong;
 
 import static helper.StringGenerator.generateString;
 import static org.apache.http.HttpStatus.SC_FORBIDDEN;
@@ -48,13 +48,13 @@ public class TestRegisterPositive extends SetDefaultURL {
                         .extract()
                         .as(RespRegister.class);
 
-        bearerToken = reqRegisterApi.accessToken;
+        bearerToken = reqRegisterApi.getAccessToken();
 
-        Assert.assertTrue(reqRegisterApi.success);
-        Assert.assertEquals(email, reqRegisterApi.user.email);
-        Assert.assertEquals(name, reqRegisterApi.user.name);
-        Assert.assertNotNull(reqRegisterApi.accessToken);
-        Assert.assertNotNull(reqRegisterApi.refreshToken);
+        Assert.assertTrue(reqRegisterApi.getSuccess());
+        Assert.assertEquals(email, reqRegisterApi.getUser().getEmail());
+        Assert.assertEquals(name, reqRegisterApi.getUser().getName());
+        Assert.assertNotNull(reqRegisterApi.getAccessToken());
+        Assert.assertNotNull(reqRegisterApi.getRefreshToken());
     }
 
     @Test
@@ -67,7 +67,7 @@ public class TestRegisterPositive extends SetDefaultURL {
                         .extract()
                         .as(RespRegister.class);
 
-        bearerToken = reqRegisterApi.accessToken;
+        bearerToken = reqRegisterApi.getAccessToken();
 
         RespWrong respWrong =
                 makePostRequestWithNoAuthorization(USER_CREATION, new ReqRegister(email, password, name))
@@ -76,7 +76,7 @@ public class TestRegisterPositive extends SetDefaultURL {
                         .extract()
                         .as(RespWrong.class);
 
-        Assert.assertFalse(respWrong.success);
+        Assert.assertFalse(respWrong.getSuccess());
         Assert.assertEquals(EXPECTED_MESSAGE, respWrong.getMessage());
     }
 

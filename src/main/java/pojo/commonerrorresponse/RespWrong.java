@@ -1,4 +1,4 @@
-package pojo.commonErrorResponse;
+package pojo.commonerrorresponse;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RespWrong {
-    public boolean success;
-    public String message;
+    private Boolean success;
+    private String message;
 }

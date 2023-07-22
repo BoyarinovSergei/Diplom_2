@@ -39,7 +39,7 @@ public class TestLoginPositive extends SetDefaultURL {
                         .then()
                         .statusCode(SC_OK)
                         .extract()
-                        .as(RespRegister.class).accessToken;
+                        .as(RespRegister.class).getAccessToken();
     }
 
     @Test
@@ -52,11 +52,11 @@ public class TestLoginPositive extends SetDefaultURL {
                         .extract()
                         .as(RespLogin.class);
 
-        Assert.assertTrue(respLogin.success);
-        Assert.assertEquals(email, respLogin.user.email);
-        Assert.assertEquals(name, respLogin.user.name);
-        Assert.assertNotNull(respLogin.accessToken);
-        Assert.assertNotNull(respLogin.refreshToken);
+        Assert.assertTrue(respLogin.getSuccess());
+        Assert.assertEquals(email, respLogin.getUser().getEmail());
+        Assert.assertEquals(name, respLogin.getUser().getName());
+        Assert.assertNotNull(respLogin.getAccessToken());
+        Assert.assertNotNull(respLogin.getRefreshToken());
     }
 
     @After

@@ -11,7 +11,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import pojo.register.request.ReqRegister;
-import pojo.commonErrorResponse.RespWrong;
+import pojo.commonerrorresponse.RespWrong;
 
 import static helper.StringGenerator.generateString;
 import static org.apache.http.HttpStatus.SC_FORBIDDEN;
@@ -46,7 +46,7 @@ public class TestRegisterNegative extends SetDefaultURL {
                         .extract()
                         .as(RespWrong.class);
 
-        Assert.assertFalse(respWrong.success);
+        Assert.assertFalse(respWrong.getSuccess());
         Assert.assertEquals(EXPECTED_MESSAGE, respWrong.getMessage());
     }
 }

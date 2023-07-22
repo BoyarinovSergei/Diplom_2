@@ -10,9 +10,9 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RespGetOrdersRoot {
-    public boolean success;
-    public List<Order> orders;
-    public int total;
-    public int totalToday;
+    private Boolean success;
+    private List<Order> orders;
+    private int total;
+    private int totalToday;
 }
 

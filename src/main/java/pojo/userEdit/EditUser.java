@@ -9,6 +9,6 @@ import pojo.register.correctResponse.User;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EditUser {
-    public boolean success;
-    public User user;
+    private Boolean success;
+    private User user;
 }

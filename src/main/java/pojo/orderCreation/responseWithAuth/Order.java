@@ -10,13 +10,13 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Order {
-    public List<Ingredient> ingredients;
-    public String _id;
-    public Owner owner;
-    public String status;
-    public String name;
-    public String createdAt;
-    public String updatedAt;
-    public int number;
-    public int price;
+    private List<Ingredient> ingredients;
+    private String _id;
+    private Owner owner;
+    private String status;
+    private String name;
+    private String createdAt;
+    private String updatedAt;
+    private int number;
+    private int price;
 }

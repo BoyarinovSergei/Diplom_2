@@ -9,7 +9,7 @@ import commonClasses.SetDefaultURL;
 import io.qameta.allure.Description;
 import org.junit.Assert;
 import org.junit.Test;
-import pojo.commonErrorResponse.RespWrong;
+import pojo.commonerrorresponse.RespWrong;
 import pojo.orderCreation.request.ReqOrderCreation;
 
 import java.util.List;
@@ -33,7 +33,7 @@ public class TestOrderCreationNegative extends SetDefaultURL {
                         .extract()
                         .as(RespWrong.class);
 
-        Assert.assertFalse(respWrong.success);
+        Assert.assertFalse(respWrong.getSuccess());
         Assert.assertEquals(EXPECTED_MESSAGE, respWrong.getMessage());
     }
 

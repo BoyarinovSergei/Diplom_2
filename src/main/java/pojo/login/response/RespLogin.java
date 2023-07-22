@@ -9,8 +9,8 @@ import pojo.register.correctResponse.User;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RespLogin {
-    public boolean success;
-    public String accessToken;
-    public String refreshToken;
-    public User user;
+    private Boolean success;
+    private String accessToken;
+    private String refreshToken;
+    private User user;
 }

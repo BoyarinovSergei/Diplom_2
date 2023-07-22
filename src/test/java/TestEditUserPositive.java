@@ -56,7 +56,7 @@ public class TestEditUserPositive extends SetDefaultURL {
                         .then()
                         .statusCode(SC_OK)
                         .extract()
-                        .as(RespRegister.class).accessToken;
+                        .as(RespRegister.class).getAccessToken();
     }
 
     @Test
@@ -70,9 +70,9 @@ public class TestEditUserPositive extends SetDefaultURL {
                         .extract()
                         .as(EditUser.class);
 
-        Assert.assertTrue(editUser1.success);
-        Assert.assertEquals(editUser1.user.getEmail(), email);
-        Assert.assertEquals(editUser1.user.getName(), name);
+        Assert.assertTrue(editUser1.getSuccess());
+        Assert.assertEquals(editUser1.getUser().getEmail(), email);
+        Assert.assertEquals(editUser1.getUser().getName(), name);
     }
 
     @After

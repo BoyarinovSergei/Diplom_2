@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ReqRegister {
-    public String email;
-    public String password;
-    public String name;
+    private String email;
+    private String password;
+    private String name;
 }

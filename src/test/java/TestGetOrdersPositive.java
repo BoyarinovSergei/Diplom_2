@@ -41,7 +41,7 @@ public class TestGetOrdersPositive extends SetDefaultURL {
                         .extract()
                         .as(RespRegister.class);
 
-        bearerToken = reqRegisterApi.accessToken;
+        bearerToken = reqRegisterApi.getAccessToken();
 
         respIngredientsRoot = makeGetRequest(INGREDIENTS)
                 .then()
@@ -49,7 +49,7 @@ public class TestGetOrdersPositive extends SetDefaultURL {
                 .extract()
                 .as(RespIngredientsRoot.class);
 
-        makePostRequestWithAuthorization(ORDER, new ReqOrderCreation(List.of(respIngredientsRoot.data.get(0)._id)), bearerToken)
+        makePostRequestWithAuthorization(ORDER, new ReqOrderCreation(List.of(respIngredientsRoot.getData().get(0).get_id())), bearerToken)
                 .then()
                 .statusCode(SC_OK);
     }
@@ -64,8 +64,8 @@ public class TestGetOrdersPositive extends SetDefaultURL {
                 .extract()
                 .as(RespGetOrdersRoot.class);
 
-        Assert.assertTrue(resp.success);
-        Assert.assertEquals(respIngredientsRoot.data.get(0)._id, resp.getOrders().get(0).getIngredients().get(0));
+        Assert.assertTrue(resp.getSuccess());
+        Assert.assertEquals(respIngredientsRoot.getData().get(0).get_id(), resp.getOrders().get(0).getIngredients().get(0));
     }
 
     @After

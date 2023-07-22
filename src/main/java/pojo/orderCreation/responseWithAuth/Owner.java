@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Owner {
-    public String name;
-    public String email;
-    public String createdAt;
-    public String updatedAt;
+    private String name;
+    private String email;
+    private String createdAt;
+    private String updatedAt;
 }

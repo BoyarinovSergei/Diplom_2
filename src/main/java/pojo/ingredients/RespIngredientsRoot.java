@@ -10,7 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RespIngredientsRoot {
-    public boolean success;
-    public List<Datum> data;
+    private Boolean success;
+    private List<Datum> data;
 }
 

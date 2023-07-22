@@ -8,16 +8,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Ingredient {
-    public String _id;
-    public String name;
-    public String type;
-    public int proteins;
-    public int fat;
-    public int carbohydrates;
-    public int calories;
-    public int price;
-    public String image;
-    public String image_mobile;
-    public String image_large;
-    public int __v;
+    private String _id;
+    private String name;
+    private String type;
+    private int proteins;
+    private int fat;
+    private int carbohydrates;
+    private int calories;
+    private int price;
+    private String image;
+    private String image_mobile;
+    private String image_large;
+    private int __v;
 }

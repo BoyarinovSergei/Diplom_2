@@ -46,7 +46,7 @@ public class TestOrderCreationPositive extends SetDefaultURL {
                         .extract()
                         .as(RespRegister.class);
 
-        bearerToken = reqRegisterApi.accessToken;
+        bearerToken = reqRegisterApi.getAccessToken();
 
         respIngredientsRoot =
                 makeGetRequest(INGREDIENTS).as(RespIngredientsRoot.class);
@@ -56,31 +56,31 @@ public class TestOrderCreationPositive extends SetDefaultURL {
     @Description("Создание заказа с авторизацией, проверкой кода и тела ответа")
     public void createNewOrderWithToken() {
         RespOrderCreationAuthRoot resp =
-                makePostRequestWithAuthorization(ORDER, new ReqOrderCreation(List.of(respIngredientsRoot.data.get(0)._id)), bearerToken)
+                makePostRequestWithAuthorization(ORDER, new ReqOrderCreation(List.of(respIngredientsRoot.getData().get(0).get_id())), bearerToken)
                         .then()
                         .statusCode(SC_OK)
                         .extract()
                         .as(RespOrderCreationAuthRoot.class);
 
-        Assert.assertTrue(resp.success);
-        Assert.assertNotNull(resp.name);
-        Assert.assertEquals(email, resp.order.getOwner().getEmail());
-        Assert.assertEquals(name, resp.order.getOwner().getName());
+        Assert.assertTrue(resp.getSuccess());
+        Assert.assertNotNull(resp.getName());
+        Assert.assertEquals(email, resp.getOrder().getOwner().getEmail());
+        Assert.assertEquals(name, resp.getOrder().getOwner().getName());
     }
 
     @Test
     @Description("Создание заказа без авторизации, проверкой кода и тела ответа")
     public void createNewOrderWithNoToken() {
         RespOrderCreationWithNoAuth resp =
-                makePostRequestWithNoAuthorization(ORDER, new ReqOrderCreation(List.of(respIngredientsRoot.data.get(0)._id)))
+                makePostRequestWithNoAuthorization(ORDER, new ReqOrderCreation(List.of(respIngredientsRoot.getData().get(0).get_id())))
                         .then()
                         .statusCode(SC_OK)
                         .extract()
                         .as(RespOrderCreationWithNoAuth.class);
 
-        Assert.assertTrue(resp.success);
-        Assert.assertNotNull(resp.name);
-        Assert.assertTrue(resp.order.getNumber() > 0);
+        Assert.assertTrue(resp.getSuccess());
+        Assert.assertNotNull(resp.getName());
+        Assert.assertTrue(resp.getOrder().getNumber() > 0);
     }
 
     @After
