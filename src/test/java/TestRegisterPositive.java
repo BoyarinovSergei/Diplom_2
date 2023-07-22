@@ -5,6 +5,7 @@
  * 2. создать пользователя, который уже зарегистрирован;
  * */
 
+import commonClasses.SetDefaultURL;
 import io.qameta.allure.Description;
 import org.junit.After;
 import org.junit.Assert;
@@ -13,8 +14,6 @@ import org.junit.Test;
 import pojo.register.correctResponse.RespRegister;
 import pojo.register.request.ReqRegister;
 import pojo.commonErrorResponse.RespWrong;
-
-import java.util.Locale;
 
 import static helper.StringGenerator.generateString;
 import static org.apache.http.HttpStatus.SC_FORBIDDEN;

@@ -4,6 +4,7 @@
  * 1. неавторизованный пользователь.
  * */
 
+import commonClasses.SetDefaultURL;
 import io.qameta.allure.Description;
 import org.junit.Assert;
 import org.junit.Test;

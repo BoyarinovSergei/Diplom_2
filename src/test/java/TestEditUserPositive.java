@@ -4,6 +4,7 @@
  * 1. с авторизацией,
  * */
 
+import commonClasses.SetDefaultURL;
 import io.qameta.allure.Description;
 import org.junit.After;
 import org.junit.Assert;
@@ -15,8 +16,6 @@ import pojo.register.correctResponse.RespRegister;
 import pojo.register.correctResponse.User;
 import pojo.register.request.ReqRegister;
 import pojo.userEdit.EditUser;
-
-import java.util.Locale;
 
 import static helper.StringGenerator.generateString;
 import static org.apache.http.HttpStatus.SC_OK;

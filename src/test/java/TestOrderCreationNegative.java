@@ -5,6 +5,7 @@
  * 5. с неверным хешем ингредиентов.
  * */
 
+import commonClasses.SetDefaultURL;
 import io.qameta.allure.Description;
 import org.junit.Assert;
 import org.junit.Test;

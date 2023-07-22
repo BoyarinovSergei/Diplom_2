@@ -4,6 +4,7 @@
  * 1. логин под существующим пользователем,
  * */
 
+import commonClasses.SetDefaultURL;
 import io.qameta.allure.Description;
 import org.junit.After;
 import org.junit.Assert;
@@ -13,8 +14,6 @@ import pojo.login.request.ReqLogin;
 import pojo.login.response.RespLogin;
 import pojo.register.correctResponse.RespRegister;
 import pojo.register.request.ReqRegister;
-
-import java.util.Locale;
 
 import static helper.StringGenerator.generateString;
 import static org.apache.http.HttpStatus.SC_OK;

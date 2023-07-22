@@ -1,3 +1,5 @@
+package commonClasses;
+
 import io.qameta.allure.Description;
 import io.restassured.RestAssured;
 import org.junit.BeforeClass;

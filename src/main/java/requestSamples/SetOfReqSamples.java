@@ -10,7 +10,6 @@ import io.restassured.response.Response;
 import static headers.SetOfHeaders.DEFAULT_HEADERS;
 import static io.restassured.RestAssured.given;
 import static org.apache.http.HttpStatus.SC_ACCEPTED;
-import static org.apache.http.HttpStatus.SC_OK;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 public class SetOfReqSamples {

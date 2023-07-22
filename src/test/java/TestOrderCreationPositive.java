@@ -6,6 +6,7 @@
  * 3. с ингредиентами,
  * */
 
+import commonClasses.SetDefaultURL;
 import io.qameta.allure.Description;
 import org.junit.After;
 import org.junit.Assert;
